@@ -1,13 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.dontworry.warehouse.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/FrameLayout_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:background="@drawable/share_edittext"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/Shop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/shop_button_selector"
+            android:gravity="center"
+            android:text="商店"
+            android:textColor="@drawable/bottom_button_text_selector" />
+
+        <RadioButton
+            android:id="@+id/Magazine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@drawable/bottom_button_text_selector"
+            android:drawableTop="@drawable/magazine_button_selector"
+            android:gravity="center"
+            android:text="杂志"
+
+            />
+
+        <RadioButton
+            android:id="@+id/Master"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@drawable/bottom_button_text_selector"
+            android:drawableTop="@drawable/master_button_selector"
+            android:gravity="center"
+            android:text="达人"
+
+            />
+
+        <RadioButton
+            android:id="@+id/Share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@drawable/bottom_button_text_selector"
+            android:drawableTop="@drawable/share_button_selector"
+            android:gravity="center"
+            android:text="分享"
+
+            />
+
+        <RadioButton
+            android:id="@+id/Personal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@drawable/bottom_button_text_selector"
+            android:drawableTop="@drawable/personal_button_selector"
+            android:gravity="center"
+            android:text="个人"
+
+            />
+    </RadioGroup>
+</LinearLayout>
