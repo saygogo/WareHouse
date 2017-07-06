@@ -95,6 +95,7 @@ public class MasterFragment extends Fragment {
     private void proFromData(String json) {
         MasterInfo masterInfo = JSON.parseObject(json, MasterInfo.class);
         datas = masterInfo.getData().getItems();
+
         Log.e("TAG", "proFromData" + datas.get(0).getNickname());
         adapter = new MasterAdapter(context, datas);
         rvMaster.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
