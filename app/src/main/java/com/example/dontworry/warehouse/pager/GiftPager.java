@@ -19,7 +19,8 @@ public class GiftPager extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
+        View view  = inflater.inflate(R.layout.fragment_gift,null);
+        return view;
     }
 
     @Override
