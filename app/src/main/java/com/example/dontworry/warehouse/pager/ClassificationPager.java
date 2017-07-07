@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -88,7 +89,7 @@ public class ClassificationPager extends Fragment {
         Log.e("TAG", "items" + items.get(0).getCat_id());
         //解析成功 设置适配器
         adapter = new ClassifcationAdapter(context,items);
-        rvClassifcation.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        rvClassifcation.setLayoutManager(new GridLayoutManager(context,2));
         rvClassifcation.setAdapter(adapter);
     }
 

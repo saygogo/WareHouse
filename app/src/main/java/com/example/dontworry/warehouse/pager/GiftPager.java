@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dontworry.warehouse.R;
+
 /**
  * Created by Don't worry on 2017/7/6.
  */
@@ -17,10 +19,7 @@ public class GiftPager extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText("礼物页面");
-        textView.setGravity(Gravity.CENTER);
-        return textView;
+        return null;
     }
 
     @Override
