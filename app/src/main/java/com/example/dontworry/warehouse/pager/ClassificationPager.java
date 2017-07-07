@@ -91,6 +91,7 @@ public class ClassificationPager extends Fragment {
         adapter = new ClassifcationAdapter(context,items);
         rvClassifcation.setLayoutManager(new GridLayoutManager(context,2));
         rvClassifcation.setAdapter(adapter);
+
     }
 
     @Override

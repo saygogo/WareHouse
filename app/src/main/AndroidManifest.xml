@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SplshActivity"></activity>
+        <activity android:name=".activity.SplshActivity" />
+        <activity android:name=".classifcationactivity.ClassidcationHomeFurnishingItemActivity"></activity>
     </application>
 
 </manifest>
