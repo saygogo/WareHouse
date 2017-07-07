@@ -43,6 +43,7 @@ public class SplshActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(SplshActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         },6000);
 

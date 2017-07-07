@@ -25,7 +25,6 @@ public class ClassifcationAdapter extends RecyclerView.Adapter<ClassifcationAdap
 
     private final Context context;
     private final List<ClassifctionInfo.DataBean.ItemsBean> items;
-    private String url = "http://7qn7hi.com1.z0.glb.clouddn.com/ware/orig/2/23/23266.png";
 
 
     public ClassifcationAdapter(Context context, List<ClassifctionInfo.DataBean.ItemsBean> items) {
