@@ -60,6 +60,7 @@ public class ShopFragment extends Fragment {
         MyPagerAdapter adapter = new MyPagerAdapter(getActivity().getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
         titleText.setText("商店");
+        viewPager.setCurrentItem(2);
 
         indicator.setupWithViewPager(viewPager);
         indicator.setTabMode(TabLayout.MODE_SCROLLABLE);
