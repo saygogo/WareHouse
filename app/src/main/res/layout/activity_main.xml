@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.dontworry.warehouse.MainActivity">
+    tools:context="com.example.dontworry.warehouse.activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/FrameLayout_main"
