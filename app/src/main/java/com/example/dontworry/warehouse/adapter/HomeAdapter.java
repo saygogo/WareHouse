@@ -1,16 +1,19 @@
 package com.example.dontworry.warehouse.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.dontworry.warehouse.R;
 import com.example.dontworry.warehouse.bean.HomeInfo;
+import com.example.dontworry.warehouse.pager.SpecialitemActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +31,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private static final int HOME_TYPE1 = 0;
     private static final int HOME_TYPE2 = 1;
     private static final int HOME_TYPE4 = 2;
+    private String pos1;
+    private String home_type1;
+    private String topic_url1;
+    private String home_type2;
+    private String pos2;
+    private String topic_url2;
 
 
     public HomeAdapter(Context context, HomeInfo.DataBean.ItemsBean items) {
@@ -91,19 +100,29 @@ public class HomeAdapter extends RecyclerView.Adapter {
         @BindView(R.id.home_type1)
         ImageView homeType1;
 
-        public HomeType1ViewHolder(View itemView) {
+        public HomeType1ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void setDate(HomeInfo.DataBean.ItemsBean.ListBean listBean) {
+        public void setDate(final HomeInfo.DataBean.ItemsBean.ListBean listBean) {
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .placeholder(R.drawable.good_big_bg)
                     .error(R.drawable.good_big_bg)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(homeType1);
+            homeType1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String topic_url = listBean.getOne().getTopic_url();
+                    Intent intent = new Intent(context,HomeItemActivity.class);
+                    intent.putExtra("topic_url",topic_url);
+                    context.startActivity(intent);
+                }
+            });
         }
+
     }
 
     class HomeType2ViewHolder extends RecyclerView.ViewHolder {
@@ -113,24 +132,43 @@ public class HomeAdapter extends RecyclerView.Adapter {
         ImageView homeType22;
 
 
-        public HomeType2ViewHolder(View itemView) {
+        public HomeType2ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void setDate(HomeInfo.DataBean.ItemsBean.ListBean listBean) {
+        public void setDate(final HomeInfo.DataBean.ItemsBean.ListBean listBean) {
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .placeholder(R.drawable.good_big_bg)
                     .error(R.drawable.good_big_bg)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(homeType21);
+            homeType21.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String topic_url = listBean.getOne().getTopic_url();
+                    Intent intent = new Intent(context,HomeItemActivity.class);
+                    intent.putExtra("topic_url",topic_url);
+                    context.startActivity(intent);
+                }
+            });
             Glide.with(context)
                     .load(listBean.getTwo().getPic_url())
                     .placeholder(R.drawable.good_big_bg)
                     .error(R.drawable.good_big_bg)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(homeType22);
+            homeType22.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String topic_url = listBean.getTwo().getTopic_url();
+                    Intent intent = new Intent(context,HomeItemActivity.class);
+                    intent.putExtra("topic_url",topic_url);
+                    context.startActivity(intent);
+                }
+            });
+
 
         }
     }
@@ -146,28 +184,65 @@ public class HomeAdapter extends RecyclerView.Adapter {
         @BindView(R.id.home_type4_4)
         ImageView homeType44;
 
-        public HomeType4ViewHolder(View itemView) {
+        public HomeType4ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void setData(HomeInfo.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final HomeInfo.DataBean.ItemsBean.ListBean listBean) {
+
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(homeType41);
+            homeType41.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String topic_url = listBean.getOne().getTopic_url();
+                    Intent intent = new Intent(context,HomeItemActivity.class);
+                    intent.putExtra("topic_url",topic_url);
+                    context.startActivity(intent);
+                }
+            });
             Glide.with(context)
                     .load(listBean.getTwo().getPic_url())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(homeType42);
+            homeType42.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String topic_url = listBean.getTwo().getTopic_url();
+                    Intent intent = new Intent(context,HomeItemActivity.class);
+                    intent.putExtra("topic_url",topic_url);
+                    context.startActivity(intent);
+                }
+            });
             Glide.with(context)
                     .load(listBean.getThree().getPic_url())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(homeType43);
+            homeType43.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String topic_url = listBean.getThree().getTopic_url();
+                    Intent intent = new Intent(context,HomeItemActivity.class);
+                    intent.putExtra("topic_url",topic_url);
+                    context.startActivity(intent);
+                }
+            });
             Glide.with(context)
                     .load(listBean.getFour().getPic_url())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(homeType44);
+            homeType44.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String topic_url = listBean.getFour().getTopic_url();
+                    Intent intent = new Intent(context,HomeItemActivity.class);
+                    intent.putExtra("topic_url",topic_url);
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }

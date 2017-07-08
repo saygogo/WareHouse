@@ -21,7 +21,8 @@
         <activity android:name=".activity.SplshActivity" />
         <activity android:name=".classifcationactivity.ClassifcationHomeFurnishingItemActivity" />
         <activity android:name=".classifcationactivity.ClassifcationHomeFurnishingDetailsItemActivity" />
-        <activity android:name=".pager.SpecialitemActivity"></activity>
+        <activity android:name=".pager.SpecialitemActivity" />
+        <activity android:name=".adapter.HomeItemActivity"></activity>
     </application>
 
 </manifest>
