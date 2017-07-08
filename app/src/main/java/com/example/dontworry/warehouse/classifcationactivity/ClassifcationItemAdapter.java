@@ -83,8 +83,25 @@ public class ClassifcationItemAdapter extends RecyclerView.Adapter<Classifcation
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null) {
+                        listener.OnItemClick(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener l){
+        this.listener = l;
+    }
+    private OnItemClickListener listener;
 
 }
 

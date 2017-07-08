@@ -1,7 +1,6 @@
 package com.example.dontworry.warehouse.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.dontworry.warehouse.R;
 import com.example.dontworry.warehouse.bean.ClassifctionInfo;
-import com.example.dontworry.warehouse.classifcationactivity.ClassidcationHomeFurnishingItemActivity;
 
 import java.util.List;
 
@@ -73,11 +71,22 @@ public class ClassifcationAdapter extends RecyclerView.Adapter<ClassifcationAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ClassidcationHomeFurnishingItemActivity.class);
-                    context.startActivity(intent);
+                    if(onItemClickListener!=null){
+                        onItemClickListener.OnItemClick(getLayoutPosition());
+                    }
                 }
             });
         }
     }
+
+    public interface OnItemClickListener {
+        void OnItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public OnItemClickListener onItemClickListener;
 
 }

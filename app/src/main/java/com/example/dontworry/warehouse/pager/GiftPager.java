@@ -13,6 +13,7 @@ import com.example.dontworry.warehouse.R;
 
 /**
  * Created by Don't worry on 2017/7/6.
+ * 礼物页面
  */
 
 public class GiftPager extends Fragment {

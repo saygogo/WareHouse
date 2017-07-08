@@ -12,11 +12,12 @@
         android:orientation="vertical">
 
         <ImageView
-            android:background="@drawable/ic_present_1"
+            android:background="@drawable/ease_chat_face_normal"
             android:id="@+id/class_image"
             android:layout_width="170dp"
             android:layout_height="140dp"
             android:layout_gravity="center" />
+
 
         <TextView
             android:id="@+id/class_goods_name"
