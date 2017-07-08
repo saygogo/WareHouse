@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by Don't worry on 2017/7/6.
+ * 达人数据
  */
 
 public class MasterInfo {

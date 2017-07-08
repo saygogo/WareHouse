@@ -26,7 +26,7 @@ import okhttp3.Call;
 
 /**
  * Created by Don't worry on 2017/7/6.
- * 品牌页面
+ * 商店-品牌页面
  */
 
 public class BrandPager extends Fragment {

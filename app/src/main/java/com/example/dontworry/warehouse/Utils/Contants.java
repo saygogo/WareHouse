@@ -2,6 +2,7 @@ package com.example.dontworry.warehouse.Utils;
 
 /**
  * Created by Don't worry on 2017/7/7.
+ * 商店页面的接口文档
  */
 
 public class Contants {

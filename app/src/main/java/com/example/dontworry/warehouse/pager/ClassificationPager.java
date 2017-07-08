@@ -32,7 +32,7 @@ import okhttp3.Call;
 
 /**
  * Created by Don't worry on 2017/7/6.
- * 分类页面
+ * 商店-分类页面
  */
 
 public class ClassificationPager extends Fragment {

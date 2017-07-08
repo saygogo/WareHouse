@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Don't worry on 2017/7/6.
+ * 达人适配器-MyViewHolder
  */
 
 public class MasterAdapter extends RecyclerView.Adapter<MasterAdapter.MyViewHolder> {

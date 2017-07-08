@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Don't worry on 2017/7/6.
+ * 分类适配器-MyViewHolder
  */
 
 public class ClassifcationAdapter extends RecyclerView.Adapter<ClassifcationAdapter.MyViewHolder> {
@@ -79,6 +80,7 @@ public class ClassifcationAdapter extends RecyclerView.Adapter<ClassifcationAdap
         }
     }
 
+//接口回传下标位置
     public interface OnItemClickListener {
         void OnItemClick(int position);
     }

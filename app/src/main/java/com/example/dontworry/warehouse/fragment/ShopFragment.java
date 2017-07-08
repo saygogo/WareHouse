@@ -30,6 +30,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by Don't worry on 2017/7/5.
+ * 商店页面
  */
 
 public class ShopFragment extends Fragment {

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+//主页面
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.FrameLayout_main)

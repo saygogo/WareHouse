@@ -1,11 +1,8 @@
 package com.example.dontworry.warehouse.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -19,6 +16,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//欢迎页面
 public class SplshActivity extends AppCompatActivity {
 
 

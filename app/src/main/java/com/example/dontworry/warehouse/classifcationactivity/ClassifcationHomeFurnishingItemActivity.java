@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.dontworry.warehouse.R;
@@ -99,6 +100,7 @@ public class ClassifcationHomeFurnishingItemActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new ClassifcationItemAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
+                Toast.makeText(context, "position"+position, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(ClassifcationHomeFurnishingItemActivity.this, ClassifcationHomeFurnishingDetailsItemActivity.class));
             }
         });

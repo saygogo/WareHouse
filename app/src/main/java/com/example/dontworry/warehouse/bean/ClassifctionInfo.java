@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by Don't worry on 2017/7/6.
+ * 分类数据
  */
 
 public class ClassifctionInfo {

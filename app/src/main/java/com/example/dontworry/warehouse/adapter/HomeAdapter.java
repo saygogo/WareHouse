@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Don't worry on 2017/7/7.
+ * 首页适配器-分类型的recycleView
  */
 
 public class HomeAdapter extends RecyclerView.Adapter {

@@ -30,6 +30,7 @@ import okhttp3.Call;
 
 /**
  * Created by Don't worry on 2017/7/5.
+ * 达人页面
  */
 
 public class MasterFragment extends Fragment {

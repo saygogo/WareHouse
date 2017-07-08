@@ -26,7 +26,7 @@ import okhttp3.Call;
 
 /**
  * Created by Don't worry on 2017/7/6.
- * 专题页面
+ * 商店-专题页面
  */
 
 public class SpecialPager extends Fragment {

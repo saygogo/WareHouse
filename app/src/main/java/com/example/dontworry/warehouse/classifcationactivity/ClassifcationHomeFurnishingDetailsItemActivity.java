@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.dontworry.warehouse.R;
 
+//商店-分类- - 详情Activity
 public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatActivity {
 
     @Override

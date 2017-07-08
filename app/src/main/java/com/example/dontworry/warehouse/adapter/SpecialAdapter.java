@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Don't worry on 2017/7/7.
+ * 礼物适配器-listView
  */
 
 public class SpecialAdapter extends BaseAdapter {

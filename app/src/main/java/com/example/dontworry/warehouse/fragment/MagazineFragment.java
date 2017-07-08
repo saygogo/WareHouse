@@ -1,6 +1,5 @@
 package com.example.dontworry.warehouse.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 /**
  * Created by Don't worry on 2017/7/5.
+ * 杂志页面
  */
 
 public class MagazineFragment extends Fragment {

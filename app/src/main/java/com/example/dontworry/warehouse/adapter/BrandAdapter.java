@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Don't worry on 2017/7/6.
+ * 品牌适配器-listView
  */
 
 public class BrandAdapter extends BaseAdapter {
