@@ -1,6 +1,7 @@
 package com.example.dontworry.warehouse.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.dontworry.warehouse.R;
 import com.example.dontworry.warehouse.bean.SpecialInfo;
+import com.example.dontworry.warehouse.pager.SpecialitemActivity;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Don't worry on 2017/7/7.
- * 礼物适配器-listView
+ * 专题适配器-listView
  */
 
 public class SpecialAdapter extends BaseAdapter {
@@ -57,8 +59,9 @@ public class SpecialAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        SpecialInfo.DataBean.ItemsBean itemsBean = items.get(position);
+        final SpecialInfo.DataBean.ItemsBean itemsBean = items.get(position);
         viewHolder.specialText.setText(itemsBean.getTopic_name());
+        final String name = itemsBean.getTopic_name();
 
         Glide.with(context)
                 .load(itemsBean.getCover_img_new())
@@ -66,6 +69,16 @@ public class SpecialAdapter extends BaseAdapter {
                 .error(R.drawable.good_big_bg)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.specialImage);
+        viewHolder.specialImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String access_url = itemsBean.getAccess_url();
+                Intent intent = new Intent(context,SpecialitemActivity.class);
+                intent.putExtra("access_url",access_url);
+                intent.putExtra("name",name);
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
 
@@ -80,4 +93,12 @@ public class SpecialAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
     }
+    public interface OnItemClickListener {
+        void OnItemClick(String url);
+    }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+    private OnItemClickListener onItemClickListener;
+
 }
