@@ -43,16 +43,25 @@ public class MasterAdapter extends RecyclerView.Adapter<MasterAdapter.MyViewHold
 
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         MasterInfo.DataBean.ItemsBean itemsBean = masterInfo.get(position);
         holder.tvName.setText(itemsBean.getUsername());
         holder.tvOccupation.setText(itemsBean.getDuty());
+
         Glide.with(context)
                 .load(itemsBean.getUser_images().getOrig())
                 .placeholder(R.drawable.good_big_bg)
                 .error(R.drawable.good_big_bg)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivCharacter);
+        holder.ivCharacter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null){
+                    onItemClickListener.OnItemClick(masterInfo.get(position).getUid());
+                }
+            }
+        });
     }
 
     @Override
@@ -77,6 +86,15 @@ public class MasterAdapter extends RecyclerView.Adapter<MasterAdapter.MyViewHold
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
         }
     }
+    public interface OnItemClickListener{
+        void OnItemClick(String uid);
+    }
+    public void setOnItemClickListener( OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+    private OnItemClickListener onItemClickListener;
+
 }

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.example.dontworry.warehouse.R;
 import com.example.dontworry.warehouse.Utils.Contants;
-import com.example.dontworry.warehouse.pager.ClassificationPager;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
