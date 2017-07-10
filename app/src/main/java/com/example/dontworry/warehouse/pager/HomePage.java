@@ -6,23 +6,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.dontworry.warehouse.R;
 import com.example.dontworry.warehouse.adapter.HomeAdapter;
 import com.example.dontworry.warehouse.bean.HomeInfo;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.extras.SoundPullEventListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +39,7 @@ public class HomePage extends Fragment {
     private boolean isLoadMore = false;
 
     private String url = "http://mobile.iliangcang.com/goods/newShopHome?app_key=Android&sig=3780CB0808528F7CE99081D295EE8C0F%7C116941220826768&uid=626138098&user_token=0516ed9429352c8e1e3bd11c63ba6f54&v=1.0";
-    private HomeInfo.DataBean.ItemsBean items;
+    private List<HomeInfo.DataBean.ItemsBean.ListBeanX> items;
 
     @Nullable
     @Override
@@ -85,7 +81,7 @@ public class HomePage extends Fragment {
     //解析数据
     private void processData(String json) {
         HomeInfo homeInfo = JSON.parseObject(json, HomeInfo.class);
-        items = homeInfo.getData().getItems();
+        items = homeInfo.getData().getItems().getList();
         //设置适配器（分类型的recycleView的适配器 ）
 
         adapter = new HomeAdapter(context, items);

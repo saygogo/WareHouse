@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dontworry.warehouse.R;
-import com.example.dontworry.warehouse.masterFragment.RecommendFragment;
 import com.example.dontworry.warehouse.shareFragment.ShareRecommendFragment;
 import com.example.dontworry.warehouse.shareFragment.ShareSatinFragment;
 
