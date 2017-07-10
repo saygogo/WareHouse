@@ -4,18 +4,23 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.dontworry.warehouse.R;
 import com.example.dontworry.warehouse.adapter.HomeAdapter;
 import com.example.dontworry.warehouse.bean.HomeInfo;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.extras.SoundPullEventListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -35,6 +40,7 @@ public class HomePage extends Fragment {
     Unbinder unbinder;
     private HomeAdapter adapter;
     private Context context;
+    private boolean isLoadMore = false;
 
     private String url = "http://mobile.iliangcang.com/goods/newShopHome?app_key=Android&sig=3780CB0808528F7CE99081D295EE8C0F%7C116941220826768&uid=626138098&user_token=0516ed9429352c8e1e3bd11c63ba6f54&v=1.0";
     private HomeInfo.DataBean.ItemsBean items;
@@ -67,9 +73,7 @@ public class HomePage extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
                     }
-
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("TAG", "HomePage===" + response);
@@ -87,9 +91,7 @@ public class HomePage extends Fragment {
         adapter = new HomeAdapter(context, items);
         recycleviewHome.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycleviewHome.setAdapter(adapter);
-
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

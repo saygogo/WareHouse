@@ -46,7 +46,7 @@ public class FansFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_master_fans, container, false);
         uid = getActivity().getIntent().getStringExtra("uid");
         url = "http://mobile.iliangcang.com/user/masterFollowed?app_key=Android&count=12&owner_id=" + uid + "&page=1&sig=BF287AF953103F390674E73DDA18CFD8%7C639843030233268&v=1.0";
-
+        Log.e("TAG", ""+uid);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
