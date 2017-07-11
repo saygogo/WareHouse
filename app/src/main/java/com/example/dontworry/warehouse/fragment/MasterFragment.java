@@ -65,8 +65,15 @@ public class MasterFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         titleText.setText("达人");
+        titleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

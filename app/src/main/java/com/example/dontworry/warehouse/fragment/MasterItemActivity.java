@@ -116,15 +116,6 @@ public class MasterItemActivity extends AppCompatActivity {
         rgMaster.check(R.id.rb_master_recommend);
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-
     private void initData() {
         //联网请求
         OkHttpUtils
