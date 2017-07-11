@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.dontworry.warehouse.activity.LoginActivity">
+
+    <RelativeLayout
+        
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_login_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:text="登录"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginTop="55dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/brand_logo_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/edt_number"
+            android:drawableLeft="@drawable/actionbar_navigation_menu"
+            android:hint="手机号"
+            android:layout_marginTop="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edt_yanzhengma"
+            android:layout_marginRight="100dp"
+            android:drawableLeft="@drawable/actionbar_navigation_menu"
+            android:hint="验证码"
+            android:layout_below="@id/edt_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <Button
+            android:id="@+id/btn_huoquyanzhengma"
+            android:text="获取验证码"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/edt_number"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+
+            android:id="@+id/btn_login"
+            android:text="登录"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_huoquyanzhengma"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

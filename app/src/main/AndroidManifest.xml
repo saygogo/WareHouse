@@ -23,7 +23,9 @@
         <activity android:name=".classifcationactivity.ClassifcationHomeFurnishingDetailsItemActivity" />
         <activity android:name=".pager.SpecialitemActivity" />
         <activity android:name=".adapter.HomeItemActivity" />
-        <activity android:name=".fragment.MasterItemActivity"></activity>
+        <activity android:name=".fragment.MasterItemActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.MySelfActivity"></activity>
     </application>
 
 </manifest>
