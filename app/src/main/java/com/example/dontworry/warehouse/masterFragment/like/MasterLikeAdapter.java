@@ -1,14 +1,16 @@
-package com.example.dontworry.warehouse.masterFragment.follow;
+package com.example.dontworry.warehouse.masterFragment.like;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.example.dontworry.warehouse.R;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -16,19 +18,18 @@ import butterknife.ButterKnife;
  * Created by Don't worry on 2017/7/11.
  */
 
-public class MasterFollowAdapter extends BaseAdapter {
-
+public class MasterLikeAdapter extends BaseAdapter {
     private final Context context;
-    private final List<MasterFollowInfo.DataBean.ItemsBean.UsersBean> users;
+    private final List<MasterLikeInfo.DataBean.ItemsBean.GoodsBean> items;
 
-    public MasterFollowAdapter(Context context, List<MasterFollowInfo.DataBean.ItemsBean.UsersBean> users) {
+    public MasterLikeAdapter(Context context, List<MasterLikeInfo.DataBean.ItemsBean.GoodsBean> items) {
         this.context = context;
-        this.users = users;
+        this.items = items;
     }
 
     @Override
     public int getCount() {
-        return users == null ? 0 : users.size();
+        return items == null ? 0 : items.size();
     }
 
     @Override
@@ -45,26 +46,23 @@ public class MasterFollowAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.follow_item, null);
+            convertView = View.inflate(context, R.layout.like_item, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        MasterFollowInfo.DataBean.ItemsBean.UsersBean usersBean = users.get(position);
+        MasterLikeInfo.DataBean.ItemsBean.GoodsBean goodsBean = items.get(position);
         Glide.with(context)
-                .load(usersBean.getUser_image().getOrig())
-                .into(viewHolder.followItemImage);
-        viewHolder.followItemText.setText(usersBean.getUser_name());
+                .load(goodsBean.getGoods_image())
+                .into(viewHolder.likeImage);
         return convertView;
     }
 
     static class ViewHolder {
-        @BindView(R.id.follow_item_image)
-        ImageView followItemImage;
-        @BindView(R.id.follow_item_text)
-        TextView followItemText;
+        @BindView(R.id.like_image)
+        ImageView likeImage;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
