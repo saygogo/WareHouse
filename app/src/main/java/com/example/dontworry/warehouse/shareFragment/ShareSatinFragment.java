@@ -4,11 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.dontworry.warehouse.R;
@@ -28,8 +30,8 @@ import okhttp3.Call;
  */
 
 public class ShareSatinFragment extends Fragment {
-    @BindView(R.id.rv_share_satin)
-    RecyclerView rvShareSatin;
+    @BindView(R.id.lv_share_satin)
+    ListView lvShareSatin;
     Unbinder unbinder;
     private Context context;
     private String url = "http://s.budejie.com/topic/tag-topic/64/hot/budejie-android-6.6.3/0-20.json";
@@ -80,7 +82,7 @@ public class ShareSatinFragment extends Fragment {
         list = shareSatinInfo.getList();
 
         adapter = new ShareSatinAdapter(context,list);
-        rvShareSatin.setAdapter(adapter);
+        lvShareSatin.setAdapter(adapter);
     }
 
     @Override
