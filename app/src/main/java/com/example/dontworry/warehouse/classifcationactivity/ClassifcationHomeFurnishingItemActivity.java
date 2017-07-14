@@ -54,6 +54,9 @@ public class ClassifcationHomeFurnishingItemActivity extends AppCompatActivity {
             Contants.ART19,
     };
     private List<CalssIfcationHomeFurnishingItemInfo.DataBean.ItemsBean> items;
+    private int position;
+    private String url1;
+    private CalssIfcationHomeFurnishingItemInfo.DataBean.ItemsBean itemsBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +65,19 @@ public class ClassifcationHomeFurnishingItemActivity extends AppCompatActivity {
         context = this;
         ButterKnife.bind(this);
 
-        int position = getIntent().getIntExtra("position", -1);
+        position = getIntent().getIntExtra("position", -1);
+        url1 = urls[position];
         Log.e("TAG", ""+position);
-        initData(urls[position]);
+        initData(url1);
     }
 
-    private void initData(String position) {
-        proFromNet(position);
+    private void initData(String url1) {
+        proFromNet(url1);
     }
 
-    private void proFromNet(String url) {
+    private void proFromNet(String url1) {
         OkHttpUtils.get()
-                .url(url)
+                .url(url1)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -92,17 +96,27 @@ public class ClassifcationHomeFurnishingItemActivity extends AppCompatActivity {
         CalssIfcationHomeFurnishingItemInfo classifcationInfo = JSON.parseObject(json, CalssIfcationHomeFurnishingItemInfo.class);
         items = classifcationInfo.getData().getItems();
 
+
+       // CalssIfcationHomeFurnishingItemInfo.DataBean.ItemsBean itemsBean = items.get(position);
+
+
         adapter = new ClassifcationItemAdapter(context, items);
         clssifcationRecycleview.setLayoutManager(new GridLayoutManager(context, 2));
         clssifcationRecycleview.setAdapter(adapter);
-
+//        String goods_id = itemsBean.getGoods_id();
+//        Intent intent = new Intent(context,ClassifcationHomeFurnishingDetailsItemActivity.class);
+//        Log.e("TAG", "ClassifcationHomegoods_id"+goods_id);
+//        intent.putExtra("good_id",goods_id);
+//        context.startActivity(intent);
         adapter.setOnItemClickListener(new ClassifcationItemAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
-                Toast.makeText(context, "position"+position, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(ClassifcationHomeFurnishingItemActivity.this, ClassifcationHomeFurnishingDetailsItemActivity.class));
+                itemsBean = items.get(position);
+                String goods_id = itemsBean.getGoods_id();
+                Intent intent = new Intent(context,ClassifcationHomeFurnishingDetailsItemActivity.class);
+                intent.putExtra("good_id",goods_id);
+                startActivity(intent);
             }
         });
     }
-
 }

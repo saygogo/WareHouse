@@ -23,4 +23,22 @@
         <item name="android:textColor">#22000000</item>
         <item name="textAllCaps">false</item>
     </style>
+
+    <!--商品详情布局TextView 共性属性抽取-->
+    <style name="GoodsInfoTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textColor">#cccccc</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <!--横向线  商品详情页面用的比较多-->
+    <style name="ViewLine">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">#3a668e</item>
+
+    </style>
 </resources>

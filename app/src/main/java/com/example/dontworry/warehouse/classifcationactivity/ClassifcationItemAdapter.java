@@ -6,12 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.dontworry.warehouse.R;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -61,6 +58,7 @@ public class ClassifcationItemAdapter extends RecyclerView.Adapter<Classifcation
                 .placeholder(R.drawable.good_big_bg)
                 .error(R.drawable.good_big_bg)
                 .into(holder.classImage);
+
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
