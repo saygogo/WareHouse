@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
@@ -199,6 +200,50 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
 
         tvRecommend.setText(items.getBrand_info().getBrand_desc());
 
+        rbGoodsNotice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rlGoodsInfo.setVisibility(View.GONE);
+                llGoodsnotice.setVisibility(View.VISIBLE);
+                tvGoodsnotice.setText(items.getGood_guide().getContent());
+            }
+        });
+        rbGoodsInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rlGoodsInfo.setVisibility(View.VISIBLE);
+                llGoodsnotice.setVisibility(View.GONE);
+            }
+        });
+
+        //客服图片点击事件
+        idGoodsinfoService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "联系客服", Toast.LENGTH_SHORT).show();
+                ShowPopWindow();
+            }
+        });
+        //购物车点击事件
+        btAddInCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "加入购物车", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        //直接购买
+        btBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "直接购买", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private void ShowPopWindow() {
 
     }
 }

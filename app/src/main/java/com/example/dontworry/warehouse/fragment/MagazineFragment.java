@@ -36,7 +36,6 @@ import okhttp3.Call;
  */
 
 public class MagazineFragment extends Fragment {
-
     @BindView(R.id.title_Search)
     ImageView titleSearch;
     @BindView(R.id.title_Text)
@@ -47,9 +46,9 @@ public class MagazineFragment extends Fragment {
     ListView lvMagazine;
     Unbinder unbinder;
     private Context context;
-    String url = "http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=1&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
     private MasterMagazineAdapter adapter;
     private ArrayList<MagazineInfo> list;
+
 
     @Nullable
     @Override
@@ -68,6 +67,8 @@ public class MagazineFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        String url = "http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=1&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+
         proFromNet(url);
     }
 
@@ -84,52 +85,89 @@ public class MagazineFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("MagazineFragment", "MagazineFragment"+response);
+                        Log.e("MagazineFragment", "MagazineFragment" + response);
                         processData(response);
                     }
                 });
     }
 
     private void processData(String json) {
+
         try {
             JSONObject jsonObject = new JSONObject(json);
-            JSONObject data = jsonObject.getJSONObject("data");
-            JSONObject items = data.getJSONObject("items");
-            JSONArray keys = items.getJSONArray("keys");
+            JSONObject dataObject = jsonObject.optJSONObject("data");
+            JSONObject itemsObject = dataObject.optJSONObject("items");
+            JSONArray keysArray = itemsObject.optJSONArray("keys");
+            JSONObject infosObject = itemsObject.optJSONObject("infos");
 
-            list = new ArrayList();
-            JSONObject infos = items.getJSONObject("infos");
-            for(int i = 0; i < keys.length(); i++) {
-                String key = keys.getString(i);
-                JSONArray key2 = infos.getJSONArray(key);
-                int length = key2.length();
-                for(int i1 = 0; i1 < key2.length(); i1++) {
+            list = new ArrayList<>();
+            for(int i = 0; i < keysArray.length(); i++) {
+                JSONArray jsonArray = infosObject.optJSONArray(keysArray.get(i) + "");
+                
+                for(int j = 0; j < jsonArray.length(); j++) {
                     MagazineInfo magazineInfo = new MagazineInfo();
-                    JSONObject info = key2.getJSONObject(i);
-                    String topic_name = info.getString("topic_name");
+                    JSONObject object = jsonArray.optJSONObject(j);
+                    String taid = object.optString("taid");
+                    magazineInfo.setTaid(taid);
+
+                    String topic_name = object.optString("topic_name");
                     magazineInfo.setTopic_name(topic_name);
-                    String cat_name = info.getString("cat_name");
-                    Log.e("TAG", "name"+cat_name);
-                    magazineInfo.setCat_name(cat_name);
-                    String cover_img = info.getString("cover_img");
-                    Log.e("TAG", "cover_img"+cover_img);
-                    magazineInfo.setCover_img(cover_img);
-                    String topic_url = info.getString("topic_url");
-                    Log.e("TAG", "topic_url"+topic_url);
+
+                    String topic_url = object.optString("topic_url");
                     magazineInfo.setTopic_url(topic_url);
-                    magazineInfo.setAddtime(info.getString("addtime").substring(5,10));
+
+                    String cat_name = object.optString("cat_name");
+                    magazineInfo.setCat_name(cat_name);
+
+                    String cover_img = object.optString("cover_img");
+                    magazineInfo.setCover_img(cover_img);
+
+                    String addtime = object.optString("addtime");
+                    magazineInfo.setAddtime(addtime);
+
                     list.add(magazineInfo);
+
                 }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-        adapter = new MasterMagazineAdapter(context,list);
+//        try {
+//            JSONObject jsonObject = new JSONObject(json);
+//            JSONObject data = jsonObject.getJSONObject("data");
+//            JSONObject items = data.getJSONObject("items");
+//            JSONArray keys = items.getJSONArray("keys");
+//
+//            list = new ArrayList();
+//            JSONObject infos = items.getJSONObject("infos");
+//            for (int i = 0; i < keys.length(); i++) {
+//                String key = keys.getString(i);
+//                JSONArray key2 = infos.getJSONArray(key);
+//                int length = key2.length();
+//                for (int i1 = 0; i1 < key2.length(); i1++) {
+//                    MagazineInfo magazineInfo = new MagazineInfo();
+//                    JSONObject info = key2.getJSONObject(i);
+//                    String topic_name = info.getString("topic_name");
+//                    magazineInfo.setTopic_name(topic_name);
+//                    String cat_name = info.getString("cat_name");
+//                    Log.e("TAG", "name" + cat_name);
+//                    magazineInfo.setCat_name(cat_name);
+//                    String cover_img = info.getString("cover_img");
+//                    Log.e("TAG", "cover_img" + cover_img);
+//                    magazineInfo.setCover_img(cover_img);
+//                    String topic_url = info.getString("topic_url");
+//                    Log.e("TAG", "topic_url" + topic_url);
+//                    magazineInfo.setTopic_url(topic_url);
+//                    magazineInfo.setAddtime(info.getString("addtime").substring(5, 10));
+//                    list.add(magazineInfo);
+//                }
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        adapter = new MasterMagazineAdapter(context, list);
+        Log.e("TAG", "list" + list.toString());
         lvMagazine.setAdapter(adapter);
-
     }
 
     @Override

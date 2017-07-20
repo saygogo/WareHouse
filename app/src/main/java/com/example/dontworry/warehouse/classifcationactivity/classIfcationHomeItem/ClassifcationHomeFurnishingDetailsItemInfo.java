@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by Don't worry on 2017/7/12.
+ * 商店-分类-item详情
  */
 
 public class ClassifcationHomeFurnishingDetailsItemInfo {

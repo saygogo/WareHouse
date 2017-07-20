@@ -6,11 +6,10 @@ package com.example.dontworry.warehouse.fragment.magazine;
 
 public class MagazineInfo {
     private String taid;
-    private String  topic_name;
+    private String topic_name;
     private String topic_url;
     private String cat_name;
     private String cover_img;
-
     private String addtime;
 
     public MagazineInfo() {
