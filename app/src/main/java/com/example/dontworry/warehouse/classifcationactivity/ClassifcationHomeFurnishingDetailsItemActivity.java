@@ -1,17 +1,24 @@
 package com.example.dontworry.warehouse.classifcationactivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -22,8 +29,10 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.example.dontworry.warehouse.R;
+import com.example.dontworry.warehouse.activity.cartBuyActivity;
 import com.example.dontworry.warehouse.classifcationactivity.classIfcationHomeItem.ClassifcationHomeFurnishingDetailsItemInfo;
 import com.example.dontworry.warehouse.classifcationactivity.classIfcationHomeItem.GlideImageLoader;
+import com.example.dontworry.warehouse.classifcationactivity.classIfcationHomeItem.VirtualkeyboardHeight;
 import com.youth.banner.Banner;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -111,9 +120,12 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
     @BindView(R.id.id_goodsinfo_service)
     ImageButton idGoodsinfoService;
     @BindView(R.id.bt_add_in_cart)
+
     Button btAddInCart;
     @BindView(R.id.bt_buy)
     Button btBuy;
+    @BindView(R.id.add_cart)
+    LinearLayout addCart;
     private String good_id;
     private ClassifcationHomeFurnishingDetailsItemInfo.DataBean.ItemsBean items;
 
@@ -149,7 +161,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void proFromNet(String json) {
-        ClassifcationHomeFurnishingDetailsItemInfo info = JSON.parseObject(json, ClassifcationHomeFurnishingDetailsItemInfo.class);
+        final ClassifcationHomeFurnishingDetailsItemInfo info = JSON.parseObject(json, ClassifcationHomeFurnishingDetailsItemInfo.class);
         items = info.getData().getItems();
         ivGoodsinfoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,7 +233,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
             @Override
             public void onClick(View v) {
                 Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "联系客服", Toast.LENGTH_SHORT).show();
-                ShowPopWindow();
+
             }
         });
         //购物车点击事件
@@ -229,7 +241,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
             @Override
             public void onClick(View v) {
                 Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "加入购物车", Toast.LENGTH_SHORT).show();
-
+                ShowPopWindow();
             }
         });
 
@@ -241,9 +253,105 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
 
             }
         });
+
+        //购物车
+        ivGoodsinfoCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ClassifcationHomeFurnishingDetailsItemActivity.this,cartBuyActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void ShowPopWindow() {
+        // 1 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.popupwindow_add_procart, null);
 
+        // 2下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+        final PopupWindow window = new PopupWindow(view,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+
+        // 3 参数设置
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(true);
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xFFFFFFFF);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+
+
+        // 4 控件处理
+        ImageView cart_image = (ImageView) view.findViewById(R.id.cart_image);
+        TextView cart_name = (TextView) view.findViewById(R.id.cart_name);
+        TextView cart_details = (TextView) view.findViewById(R.id.cart_details);
+        AddSubView nas_goodinfo_num = (AddSubView) view.findViewById(R.id.nas_goodinfo_num);
+        TextView cart_price = (TextView) view.findViewById(R.id.cart_price);
+
+        Button bt_goodinfo_confim = (Button) view.findViewById(R.id.bt_goodinfo_confim);
+
+        // 加载图片
+        Glide.with(ClassifcationHomeFurnishingDetailsItemActivity.this)
+                .load(items.getGoods_image())
+                .into(cart_image);
+
+        // 名称
+        cart_name.setText(items.getOwner_name());
+        // 显示详情
+        cart_details.setText(items.getGoods_name());
+        //显示价格
+        cart_price.setText("￥" + items.getPrice());
+
+        // 设置最大值和当前值
+        nas_goodinfo_num.setMaxValue(100);
+        //内存数据
+        // goodsBean.setNumber(1);
+        //   显示的
+        //    nas_goodinfo_num.setValue(goodsBean.getNumber());
+//
+//
+//
+//        nas_goodinfo_num.setOnNumberChangeListener(new AddSubView.OnNumberChangeListener() {
+//            @Override
+//            public void onNumberChange(int value) {
+//                goodsBean.setNumber(value);
+//            }
+//        });
+//
+//        bt_goodinfo_cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                window.dismiss();
+//            }
+//        });
+//
+        bt_goodinfo_confim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+                //添加购物车
+                //       CartStorage.getInstance(MyApplication.getContext()).addData(goodsBean);
+                //  Log.e("TAG", "66:" + goodsBean.toString());
+                Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+            }
+        });
+//
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                window.dismiss();
+            }
+        });
+//
+        // 5 在底部显示
+        window.showAtLocation(ClassifcationHomeFurnishingDetailsItemActivity.this.findViewById(R.id.add_cart),
+                Gravity.BOTTOM, 0, VirtualkeyboardHeight.getBottomStatusHeight(ClassifcationHomeFurnishingDetailsItemActivity.this));
+//
     }
 }
