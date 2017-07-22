@@ -29,10 +29,14 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.example.dontworry.warehouse.R;
-import com.example.dontworry.warehouse.activity.cartBuyActivity;
+import com.example.dontworry.warehouse.cart.cartBean;
+import com.example.dontworry.warehouse.cart.cartBuyActivity;
 import com.example.dontworry.warehouse.classifcationactivity.classIfcationHomeItem.ClassifcationHomeFurnishingDetailsItemInfo;
 import com.example.dontworry.warehouse.classifcationactivity.classIfcationHomeItem.GlideImageLoader;
 import com.example.dontworry.warehouse.classifcationactivity.classIfcationHomeItem.VirtualkeyboardHeight;
+import com.example.dontworry.warehouse.db.DBHelper;
+import com.example.dontworry.warehouse.db.cartBeanDAO;
+import com.example.dontworry.warehouse.db.cartBeanInfo;
 import com.youth.banner.Banner;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -127,7 +131,11 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
     @BindView(R.id.add_cart)
     LinearLayout addCart;
     private String good_id;
+    public static final String CARTBEAN = "cartbean";
     private ClassifcationHomeFurnishingDetailsItemInfo.DataBean.ItemsBean items;
+    private AddSubView nas_goodinfo_num;
+    private int number= 1;
+    private cartBeanDAO cartBeanDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +145,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
         good_id = getIntent().getStringExtra("good_id");
         Log.e("TAG", "gDetailsItemActivitygood_id" + good_id);
         initData();
+        cartBeanDAO = new cartBeanDAO(this);
     }
 
     private void initData() {
@@ -240,7 +249,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
         btAddInCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "加入购物车", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "加入购物车", Toast.LENGTH_SHORT).show();
                 ShowPopWindow();
             }
         });
@@ -258,7 +267,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
         ivGoodsinfoCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ClassifcationHomeFurnishingDetailsItemActivity.this,cartBuyActivity.class);
+                Intent intent = new Intent(ClassifcationHomeFurnishingDetailsItemActivity.this, cartBuyActivity.class);
                 startActivity(intent);
             }
         });
@@ -266,7 +275,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
 
     private void ShowPopWindow() {
         // 1 利用layoutInflater获得View
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popupwindow_add_procart, null);
 
         // 2下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
@@ -290,7 +299,7 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
         ImageView cart_image = (ImageView) view.findViewById(R.id.cart_image);
         TextView cart_name = (TextView) view.findViewById(R.id.cart_name);
         TextView cart_details = (TextView) view.findViewById(R.id.cart_details);
-        AddSubView nas_goodinfo_num = (AddSubView) view.findViewById(R.id.nas_goodinfo_num);
+        nas_goodinfo_num = (AddSubView) view.findViewById(R.id.nas_goodinfo_num);
         TextView cart_price = (TextView) view.findViewById(R.id.cart_price);
 
         Button bt_goodinfo_confim = (Button) view.findViewById(R.id.bt_goodinfo_confim);
@@ -329,7 +338,15 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
 //                window.dismiss();
 //            }
 //        });
-//
+
+        nas_goodinfo_num.setOnNumberChangeListener(new AddSubView.OnNumberChangeListener() {
+            @Override
+            public void onNumberChange(int number) {
+                Log.e("TAG", "onNumberChange"+number);
+                ClassifcationHomeFurnishingDetailsItemActivity.this.number = number;
+            }
+        });
+
         bt_goodinfo_confim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -338,8 +355,18 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
                 //       CartStorage.getInstance(MyApplication.getContext()).addData(goodsBean);
                 //  Log.e("TAG", "66:" + goodsBean.toString());
                 Toast.makeText(ClassifcationHomeFurnishingDetailsItemActivity.this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+                cartBeanInfo cartBeanInfo = new cartBeanInfo();
+                cartBeanInfo.setGoods_id(items.getGoods_id());
+                cartBeanInfo.setGoods_name(items.getGoods_name());
+                cartBeanInfo.setGoods_image(items.getGoods_image());
+                cartBeanInfo.setAttr_name(items.getSku_info().get(0).getAttrList().get(0).getAttr_name());
+                cartBeanInfo.setType_name(items.getSku_info().get(0).getType_name());
+                cartBeanInfo.setPrice(items.getPrice());
+                cartBeanInfo.setNumber(String.valueOf(number));
+                cartBeanDAO.addcart(cartBeanInfo);
             }
         });
+
 //
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
@@ -352,6 +379,5 @@ public class ClassifcationHomeFurnishingDetailsItemActivity extends AppCompatAct
         // 5 在底部显示
         window.showAtLocation(ClassifcationHomeFurnishingDetailsItemActivity.this.findViewById(R.id.add_cart),
                 Gravity.BOTTOM, 0, VirtualkeyboardHeight.getBottomStatusHeight(ClassifcationHomeFurnishingDetailsItemActivity.this));
-//
     }
 }

@@ -26,7 +26,7 @@
         <activity android:name=".fragment.MasterItemActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.MySelfActivity" />
-        <activity android:name=".activity.cartBuyActivity"></activity>
+        <activity android:name=".cart.cartBuyActivity"/>
     </application>
 
 </manifest>
