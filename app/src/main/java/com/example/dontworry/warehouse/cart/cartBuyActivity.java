@@ -94,7 +94,6 @@ public class cartBuyActivity extends AppCompatActivity {
         showData();
     }
 
-
     private void showData() {
         //设置recyclerView的适配器
 
@@ -102,7 +101,6 @@ public class cartBuyActivity extends AppCompatActivity {
         recyclerview.setAdapter(adapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
     }
-
 
     @OnClick({R.id.cart_total, R.id.btn_Settlement, R.id.cart_total_deleter, R.id.back_cart, R.id.cart_buy, R.id.cb_all, R.id.cb_all_deleter, R.id.btn_Settlement_deleter})
     public void onViewClicked(View view) {
@@ -162,13 +160,11 @@ public class cartBuyActivity extends AppCompatActivity {
     }
 
     private void showDeleter() {
-
         llDeleter.setVisibility(View.VISIBLE);
         llCheckAll.setVisibility(View.GONE);
         cartBuy.setText("完成");
         cartBuy.setTag(ACTION_COMPLETE);
     }
-
 
     // 商户PID
     public static final String PARTNER = "2088911876712776";
@@ -228,12 +224,13 @@ public class cartBuyActivity extends AppCompatActivity {
                 default:
                     break;
             }
-        };
+        }
+
+        ;
     };
 
     /**
      * call alipay sdk pay. 调用SDK支付
-     *
      */
     public void pay() {
         if (TextUtils.isEmpty(PARTNER) || TextUtils.isEmpty(RSA_PRIVATE) || TextUtils.isEmpty(SELLER)) {
@@ -281,7 +278,6 @@ public class cartBuyActivity extends AppCompatActivity {
                 mHandler.sendMessage(msg);
             }
         };
-
         // 必须异步调用
         Thread payThread = new Thread(payRunnable);
         payThread.start();
@@ -289,7 +285,6 @@ public class cartBuyActivity extends AppCompatActivity {
 
     /**
      * create the order info. 创建订单信息
-     *
      */
     private String getOrderInfo(String subject, String body, String price) {
 
@@ -341,7 +336,6 @@ public class cartBuyActivity extends AppCompatActivity {
 
     /**
      * get the out_trade_no for an order. 生成商户订单号，该值在商户端应保持唯一（可自定义格式规范）
-     *
      */
     private String getOutTradeNo() {
         SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
@@ -357,8 +351,7 @@ public class cartBuyActivity extends AppCompatActivity {
     /**
      * sign the order info. 对订单信息进行签名
      *
-     * @param content
-     *            待签名订单信息
+     * @param content 待签名订单信息
      */
     private String sign(String content) {
         return SignUtils.sign(content, RSA_PRIVATE);
@@ -366,12 +359,8 @@ public class cartBuyActivity extends AppCompatActivity {
 
     /**
      * get the sign type we use. 获取签名方式
-     *
      */
     private String getSignType() {
         return "sign_type=\"RSA\"";
     }
-
-
-
 }
