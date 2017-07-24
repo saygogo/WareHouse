@@ -28,16 +28,26 @@ public class shoppingCartAdapter extends RecyclerView.Adapter<shoppingCartAdapte
 
     private final Context context;
     private final List<cartBeanInfo> datas;
+    private final CheckBox cbAll;
+    private final TextView cartTotal;
+    private final CheckBox cbAllDeleter;
+    private boolean ischeck;
 
 
-    public shoppingCartAdapter(Context context, List<cartBeanInfo> cartBeanInfos) {
+    public shoppingCartAdapter(Context context, List<cartBeanInfo> cartBeanInfos, CheckBox cbAll, TextView cartTotal, CheckBox cbAllDeleter) {
         this.context = context;
         this.datas = cartBeanInfos;
+        //编辑页面全选
+        this.cbAll = cbAll;
+        //总价格
+        this.cartTotal = cartTotal;
+        //删除页面全选
+        this.cbAllDeleter = cbAllDeleter;
     }
 
     @Override
     public ViewHodler onCreateViewHolder(ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(context).inflate(R.layout.item_cart,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_cart, parent, false);
         return new ViewHodler(view);
 
     }
@@ -61,7 +71,90 @@ public class shoppingCartAdapter extends RecyclerView.Adapter<shoppingCartAdapte
         return datas == null ? 0 : datas.size();
     }
 
+    public void showTotalPrice() {
+        cartTotal.setText("总计：" + getshowTotalPrice());
+    }
+
+    public String getshowTotalPrice() {
+        double rusult = 0;
+        if (datas != null && datas.size() > 0) {
+            for (int i = 0; i < datas.size(); i++) {
+                cartBeanInfo cartBeanInfo = datas.get(i);
+                if (cartBeanInfo.isCaeked()) {
+                    rusult = rusult + Double.parseDouble(cartBeanInfo.getNumber())*Double.parseDouble(cartBeanInfo.getPrice());
+                }
+            }
+        }
+        return rusult+"";
+    }
+
+    //检验全选
+    public void checkAll() {
+        if(datas != null && datas.size() >0){
+            int number = 0;
+
+            for(int i = 0; i < datas.size(); i++) {
+                cartBeanInfo cartBeanInfo = datas.get(i);
+                //只要有一个不选中就设置非全选
+                if(!cartBeanInfo.isCaeked()){
+                    cbAll.setChecked(false);
+                    cbAllDeleter.setChecked(false);
+                }else{
+                    number ++;
+                }
+            }
+
+            if(number ==datas.size()){
+                cbAll.setChecked(true);
+                cbAllDeleter.setChecked(true);
+            }
+
+
+        }else {
+            //没有数据
+            cbAll.setChecked(false);
+            cbAllDeleter.setChecked(false);
+        }
+
+    }
+
+    //是否全部选中
+    public void checkAll_none(boolean isCheck) {
+        if(datas != null && datas.size() >0){
+            int number = 0;
+
+            for(int i = 0; i < datas.size(); i++) {
+                cartBeanInfo cartBeanInfo = datas.get(i);
+                //只要有一个不选中就设置非全选
+                cartBeanInfo.setCaeked(isCheck);
+                notifyItemChanged(i);
+            }
+        }else{
+            cbAllDeleter.setChecked(false);
+        }
+
+    }
+
+    public void deleteData() {
+
+        if(datas != null && datas.size() > 0){
+
+            for(int i = 0; i < datas.size(); i++) {
+
+                cartBeanInfo cartBeanInfo = datas.get(i);
+                if(cartBeanInfo.isCaeked()){
+                    datas.remove(cartBeanInfo);
+                    //同步到本地
+                   // CartStorage.getInstance(context).deleteData(goodsBean);
+                    notifyItemRemoved(i);
+                    i--;
+                }
+            }
+        }
+    }
+
     class ViewHodler extends RecyclerView.ViewHolder {
+
         @BindView(R.id.cb_check)
         CheckBox cbCheck;
         @BindView(R.id.goods_image)
@@ -78,9 +171,24 @@ public class shoppingCartAdapter extends RecyclerView.Adapter<shoppingCartAdapte
         LinearLayout llText;
         @BindView(R.id.number)
         TextView number;
+
         public ViewHodler(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cartBeanInfo cartBeanInfo = datas.get(getLayoutPosition());
+                    //状态取反
+                    cartBeanInfo.setCaeked(!cartBeanInfo.isCaeked());
+                    notifyItemChanged(getLayoutPosition());
+                    //设置价格
+                    showTotalPrice();
+                    //校验是否全选
+                    checkAll();
+                }
+            });
+
         }
     }
 }
