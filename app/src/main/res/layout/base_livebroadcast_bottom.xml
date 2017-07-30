@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/base_livebroadcast_bottom_lookmore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="查看更多"
+        android:textSize="10sp" />
+
+
+    <TextView
+        android:id="@+id/base_livebroadcast_bottom_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:drawableRight="@drawable/ease_chatting_biaoqing_btn_enable"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="8条新动态，点击刷新" />
+</RelativeLayout>

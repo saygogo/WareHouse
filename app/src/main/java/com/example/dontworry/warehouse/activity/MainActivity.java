@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.example.dontworry.warehouse.R;
+import com.example.dontworry.warehouse.fragment.LiveBroadcast.LiveBroadcast;
 import com.example.dontworry.warehouse.fragment.MagazineFragment;
 import com.example.dontworry.warehouse.fragment.MasterFragment;
 import com.example.dontworry.warehouse.fragment.PersonalFragment;
@@ -62,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.rb_personal:
                         position = 4;
+                        break;
+                    case R.id.rb_livebroadcast:
+                        position = 5;
                         break;
                 }
                 Fragment currentFragment = fragments.get(position);
@@ -121,5 +125,6 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new MasterFragment());//达人
         fragments.add(new ShareFragment());//分享
         fragments.add(new PersonalFragment());//个人
+        fragments.add(new LiveBroadcast());//直播页面
     }
 }
